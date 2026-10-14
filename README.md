@@ -1,6 +1,7 @@
 # Europe Trip Guide
 
-A simple travel guide website: one page per city with sights, food, bars, history, culture tips, films, books and current issues.
+A simple travel‑guide website where each city gets its own page featuring sights, food, bars, history, cultural tips, films, books, and current issues. Right now it’s just a rough draft built from quick online research, so it doesn’t yet include my personal insights or the deeper details I plan to add. Over the next few months, and continuing weekly through the end of 2026, I’ll be expanding each section with more specific recommendations, richer historical context, and a curated list of books and movies. I’m incredibly excited for this trip, and I think learning about a place’s history, culture, and etiquette beforehand is important not only to show respect for the people and their past, but also to make every experience more meaningful. In my opinion, understanding the significance behind what you’re seeing makes traveling so much more exciting, and I’ll be reading, researching, and updating the site as I learn.
+
 
 ## How the files are organized
 
