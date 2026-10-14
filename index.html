@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Europe Notebook</title>
+<meta name="theme-color" content="#f5f7f3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <a class="wordmark" href="#london" aria-label="The Europe Notebook, start at London">
+    <span class="wordmark-icon" aria-hidden="true">E</span>
+    <span><strong>The Europe Notebook</strong><small>A city-by-city field guide</small></span>
+  </a>
+  <p class="route-note"><span class="route-dot"></span> 11 stops <span class="route-divider">/</span> one long way around</p>
+</header>
+<nav id="nav" aria-label="Choose a destination"></nav>
+<main id="main" tabindex="-1"></main>
+
+<script>const CITIES = []; function addCity(c) { CITIES.push(c); }</script>
+
+<!-- One file per city, in trip order. To add a city: copy a file in /data, edit it, add a line here. -->
+<script src="data/london.js"></script>
+<script src="data/paris.js"></script>
+<script src="data/amsterdam.js"></script>
+<script src="data/berlin.js"></script>
+<script src="data/prague.js"></script>
+<script src="data/venice.js"></script>
+<script src="data/florence.js"></script>
+<script src="data/milan.js"></script>
+<script src="data/marseille.js"></script>
+<script src="data/barcelona.js"></script>
+<script src="data/madrid.js"></script>
+
+<script src="app.js"></script>
+</body>
+</html>
