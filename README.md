@@ -10,9 +10,8 @@ A simple travel guide website: one page per city with sights, food, bars, histor
 - City `.js` files beside `index.html` - one guide per destination. Each file registers its content with `addCity()`.
 
 
-## Preview locally
-
-Open `index.html` in a browser, or use the Live Server extension in VS Code.
+## Website Link:
+https://avazumerchik-design.github.io/Europe-Trip/# 
 
 ## Current events
 
