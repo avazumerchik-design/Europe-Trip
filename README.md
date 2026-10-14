@@ -7,7 +7,7 @@ A simple travel guide website: one page per city with sights, food, bars, histor
 - `index.html` - the page. Lists which city files to load.
 - `style.css` - colors, fonts and spacing.
 - `app.js` - builds each city page. The `SECTIONS` list at the top controls which sections appear and in what order.
-- `data/` - one file per city. This is where the content lives.
+- City `.js` files beside `index.html` - one guide per destination. Each file registers its content with `addCity()`.
 
 
 ## Preview locally
