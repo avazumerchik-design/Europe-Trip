@@ -1,5 +1,24 @@
 addCity({
   name: "Milan", country: "Italy",
+  dates: "Mar 7–8",
+  itinerary: [
+    "Mar 7 | Arrive from Florence; see the Duomo and Galleria Vittorio Emanuele II.",
+    "Mar 8 | Train to Interlaken, Switzerland."
+  ],
+  stay: [
+    "Near Milano Centrale | Convenient for the quick stop and next morning’s train.",
+    "Brera | Attractive central streets and cafés if you prefer a neighborhood base."
+  ],
+  eat: [
+    "Luini | A classic stop for panzerotti near the Duomo.",
+    "Navigli | Choose from canal-side aperitivo spots and restaurants.",
+    "Mercato Centrale Milano | A range of casual food options near Centrale."
+  ],
+  shop: [
+    "Galleria Vittorio Emanuele II | Historic arcade for browsing and window-shopping.",
+    "Brera | Independent boutiques and galleries.",
+    "Quadrilatero della Moda | Luxury fashion streets."
+  ],
   see: [
     "Duomo | Take the elevator to the rooftop.",
     "The Last Supper | Tickets sell out months ahead. Book as soon as you can.",

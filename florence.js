@@ -1,5 +1,30 @@
 addCity({
   name: "Florence", country: "Italy",
+  dates: "Mar 1–7",
+  itinerary: [
+    "Mar 1 | Arrive from Prague; flight estimate about $110 in your notes.",
+    "Mar 2 | Duomo complex and Piazza della Signoria.",
+    "Mar 3 | Uffizi Gallery; book a timed entry.",
+    "Mar 4 | Accademia and Michelangelo’s David.",
+    "Mar 5 | Oltrarno, Santo Spirito, and artisan streets.",
+    "Mar 6 | Flexible day for a favorite museum, garden, or slow lunch.",
+    "Mar 7 | Train to Milan."
+  ],
+  stay: [
+    "Santa Maria Novella | Practical for the train station and central sights.",
+    "Oltrarno | A neighborhood feel across the river; allow for bridge walks.",
+    "Near the Duomo | Central and convenient, but often busier."
+  ],
+  eat: [
+    "Trattoria Mario | A popular traditional lunch spot; check opening days and expect a queue.",
+    "All’Antico Vinaio | Well-known sandwiches; expect lines at busy times.",
+    "Mercato Centrale | Several food options under one roof."
+  ],
+  shop: [
+    "Oltrarno | Artisan workshops and leather goods; compare quality and prices.",
+    "San Lorenzo Market | Leather and souvenirs; bargain thoughtfully.",
+    "Via de’ Tornabuoni | High-end boutiques and window-shopping."
+  ],
   see: [
     "Duomo and Brunelleschi's dome | Climbing the dome needs a reservation.",
     "Uffizi Gallery | Botticelli's Birth of Venus. Book ahead.",

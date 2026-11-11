@@ -1,5 +1,32 @@
 addCity({
   name: "Madrid", country: "Spain",
+  dates: "Mar 21–23 & Mar 26–31",
+  itinerary: [
+    "Mar 21 | Arrive from Barcelona by train and settle in.",
+    "Mar 22 | Prado Museum, Retiro Park, and an evening in La Latina.",
+    "Mar 23 | Train to Granada.",
+    "Mar 26 | Return to Madrid from Granada.",
+    "Mar 27 | Royal Palace and Plaza Mayor.",
+    "Mar 28 | Reina Sofía and the surrounding Atocha area.",
+    "Mar 29 | Retiro Park and a leisurely neighborhood day.",
+    "Mar 30 | Flexible final day for a favorite sight, shopping, or packing.",
+    "Mar 31 | Final day in Madrid; departure details not specified."
+  ],
+  stay: [
+    "Sol or Ópera | Central for a short first stay and major sights.",
+    "La Latina | Lively tapas area with easy access to the historic center.",
+    "Atocha | Practical for trains and the Reina Sofía; convenient for returning from Granada."
+  ],
+  eat: [
+    "Casa Toni | Casual tapas in the center.",
+    "Chocolatería San Ginés | Churros con chocolate near Sol.",
+    "Mercado de San Miguel | Many small bites in one central market; often busy."
+  ],
+  shop: [
+    "El Rastro | Sunday flea market; check the date and opening details.",
+    "Gran Vía and Fuencarral | High-street shops and independent fashion.",
+    "Malasaña | Vintage, independent boutiques, and record shops."
+  ],
   see: [
     "Prado | Velazquez, Goya, El Greco.",
     "Reina Sofia | Picasso's Guernica.",

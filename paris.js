@@ -1,5 +1,31 @@
 addCity({
   name: "Paris", country: "France",
+  dates: "Feb 10–17",
+  itinerary: [
+    "Feb 10 | Arrive from London and settle in.",
+    "Feb 11 | Eiffel Tower area, Trocadéro, and a Seine-side walk.",
+    "Feb 12 | Louvre and Tuileries; reserve a timed entry.",
+    "Feb 13 | Montmartre and Sacré-Cœur.",
+    "Feb 14 | Le Marais, Place des Vosges, and a relaxed dinner.",
+    "Feb 15 | Optional Versailles day trip, or stay in the city.",
+    "Feb 16 | Musée d’Orsay and a final open evening.",
+    "Feb 17 | Train to Amsterdam."
+  ],
+  stay: [
+    "Le Marais | Central for walking, cafés, and Metro connections.",
+    "Latin Quarter | Lively and convenient for the Left Bank.",
+    "Canal Saint-Martin | A more local-feeling base; compare transit times to sights."
+  ],
+  eat: [
+    "Bouillon Pigalle | Classic French dishes at budget-friendly prices; check current hours and queues.",
+    "L’As du Fallafel | A well-known falafel stop in Le Marais.",
+    "Neighborhood boulangeries | Easy breakfast or picnic supplies; look for a formule déjeuner at lunch."
+  ],
+  shop: [
+    "Rue de Rivoli | High-street shops near the Louvre.",
+    "Le Marais | Independent boutiques and vintage shops.",
+    "Bouquinistes along the Seine | Browse the riverside booksellers when open."
+  ],
   see: [
     "Louvre | Book a timed ticket. Pick two or three wings, not the whole thing.",
     "Notre-Dame | Reopened in December 2024 after the 2019 fire.",

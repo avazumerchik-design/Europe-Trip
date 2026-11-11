@@ -1,5 +1,32 @@
 addCity({
   name: "London", country: "United Kingdom",
+  dates: "Feb 2–10",
+  itinerary: [
+    "Feb 2 | Fly to London; overnight travel.",
+    "Feb 3 | Arrive at 8:00 a.m. Stay near Paddington; keep the first day light.",
+    "Feb 4 | Possible day with friends; leave the schedule open.",
+    "Feb 5 | Possible day with friends; leave the schedule open.",
+    "Feb 6 | Day trip to Oxford.",
+    "Feb 7 | Explore London, including Goodwin’s Court, Cecil Court, and Leadenhall Market.",
+    "Feb 8 | Day trip to Bath, or stay in London for another unhurried day.",
+    "Feb 9 | Flexible London day or a backup day with friends.",
+    "Feb 10 | Travel by train to Paris."
+  ],
+  stay: [
+    "Urbany Hostel London, Bayswater | Your listed option; confirm the address, dates, and whether its advertised events and dinners are included.",
+    "Paddington or Bayswater | Convenient areas for the station and day trips; compare the exact walk to your accommodation.",
+    "Maida Vale | A quieter residential alternative with Tube connections."
+  ],
+  eat: [
+    "Borough Market | Lots of stalls for a flexible lunch; check opening days.",
+    "Dishoom | Popular Indian café; book or expect a queue.",
+    "A local pub | Try a Sunday roast or fish and chips; check serving times."
+  ],
+  shop: [
+    "Cecil Court | Small bookshops and an atmospheric central-London lane.",
+    "Leadenhall Market | Historic covered market, shops, and Harry Potter filming-location atmosphere.",
+    "Portobello Road Market | Antiques, vintage, and food stalls; busiest on Saturdays."
+  ],
   see: [
     "Tower of London | Crown Jewels and nearly 1,000 years of history. Go when it opens.",
     "British Museum | Free. The Rosetta Stone and the Egyptian galleries are the main draws.",

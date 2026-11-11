@@ -1,10 +1,10 @@
 I # Postcards from Europe
 
-A city-by-city travel notebook for an eleven-stop Europe trip. The home page opens over the Atlantic with the route from Chicago to London, then continues across Europe. Drag the interactive, textured Earth to rotate it, use the extended zoom slider to enlarge and center on Europe, follow the labeled city pins and moving plane, or use the random spin picker. Each city has its own color palette and scrapbook-style photo moodboard alongside its guide, personal journal, and postcard gallery.
+A city-by-city travel notebook for the Feb 2–Mar 31 Europe itinerary. The route starts with an overnight flight to London, continues through Paris, Amsterdam, Prague, Italy, Switzerland, and Spain, and ends back in Madrid. Oxford and Bath are London day-trip options. The home page has a vintage postcard cover and dated route cards; each city page has a day-by-day outline, neighborhood ideas, restaurant and market suggestions, a personal journal, and a postcard gallery. Dates and fares are planning notes, not bookings; confirm the year, schedules, prices, opening times, and availability before travel.
 
 ## Editing the site
 
-- Open a city, choose **Edit guide**, and update its sights, food, nightlife, places to stay, history, local notes, films, books, or current notes. Put one item on each line, then save.
+- Open a city, choose **Edit guide**, and update its itinerary, sights, food, nightlife, places to stay, shops, history, local notes, films, books, or current notes. Put one item on each line, then save.
 - Add personal entries in **Little things to remember**.
 - Upload photos and videos in **Postcards**. Images can be downloaded as postcard-style PNGs.
 - City guide edits and journal entries are saved in this browser's local storage. Photos and videos are saved in this browser's IndexedDB. They are not synced to other devices or visitors and can be removed if browser data is cleared.

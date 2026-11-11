@@ -1,5 +1,33 @@
 addCity({
   name: "Barcelona", country: "Spain",
+  dates: "Mar 12–21",
+  itinerary: [
+    "Mar 12 | Fly from Zurich to Barcelona; your roughly $80 fare is an estimate from your notes, so verify baggage and airport transfers.",
+    "Mar 13 | Sagrada Família; reserve a timed entry.",
+    "Mar 14 | Gothic Quarter and La Boqueria.",
+    "Mar 15 | Park Güell; book ahead.",
+    "Mar 16 | Barceloneta and the waterfront.",
+    "Mar 17 | Montjuïc museums, gardens, and views.",
+    "Mar 18 | Gràcia neighborhood and its squares.",
+    "Mar 19 | Optional Montserrat day trip, or keep it as a flexible city day.",
+    "Mar 20 | Open day for a favorite neighborhood or anything missed.",
+    "Mar 21 | Train to Madrid."
+  ],
+  stay: [
+    "Eixample | Convenient for the Sagrada Família and metro connections.",
+    "Gràcia | Neighborhood atmosphere with cafés and squares.",
+    "El Born | Central for walking, restaurants, and the old town."
+  ],
+  eat: [
+    "La Boqueria | Market stalls for a daytime snack or lunch; check opening days.",
+    "Bar Cañete | Popular tapas restaurant; reserve if possible.",
+    "Poble-sec | A good area for casual tapas bars along Carrer de Blai."
+  ],
+  shop: [
+    "Els Encants | Large flea market; check its current opening days.",
+    "El Born | Independent boutiques and design shops.",
+    "Passeig de Gràcia | Major fashion brands and landmark architecture."
+  ],
   see: [
     "Sagrada Familia | Gaudi's church, still under construction. Book ahead.",
     "Park Guell and Casa Batllo | More Gaudi.",

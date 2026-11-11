@@ -1,8 +1,10 @@
 const SECTIONS = [
+  ["itinerary", "Day-by-day plan"],
   ["see", "Places to see"],
-  ["eat", "What to eat"],
+  ["eat", "Restaurants & local bites"],
   ["drink", "Where to go out"],
   ["stay", "Places to stay"],
+  ["shop", "Shops & markets"],
   ["history", "A little history"],
   ["tips", "Local notes"],
   ["watch", "Films"],
@@ -26,34 +28,33 @@ const cityImages = {
   London: "photo-1513635269975-59663e0ac1ad",
   Paris: "photo-1502602898657-3e91760cbb34",
   Amsterdam: "photo-1512470876302-972faa2aa9a4",
-  Berlin: "photo-1560969184-10fe8719e047",
   Prague: "photo-1519677100203-a0e668c92439",
-  Venice: "photo-1514890547357-a9ee288728e0",
   Florence: "photo-1516483638261-f4dbaf036963",
   Milan: "photo-1513584684374-8bab748fbf90",
-  Marseille: "photo-1509023464722-18d996393ca8",
+  Interlaken: "photo-1531366936337-7c912a4589a7",
+  Zurich: "photo-1515488764276-beab7607c1e6",
   Barcelona: "photo-1583422409516-2895a77efded",
-  Madrid: "photo-1539037116277-4db20889f2d4"
+  Madrid: "photo-1539037116277-4db20889f2d4",
+  Granada: "photo-1509840841025-9088ba78a826"
 };
 const globeCities = {
   London: [-0.1, 51.5], Paris: [2.35, 48.86], Amsterdam: [4.9, 52.37],
-  Berlin: [13.4, 52.52], Prague: [14.42, 50.08], Venice: [12.32, 45.44],
-  Florence: [11.25, 43.77], Milan: [9.19, 45.46], Marseille: [5.37, 43.3],
-  Barcelona: [2.17, 41.39], Madrid: [-3.7, 40.42]
+  Prague: [14.42, 50.08], Florence: [11.25, 43.77], Milan: [9.19, 45.46],
+  Interlaken: [7.86, 46.69], Zurich: [8.54, 47.38],
+  Barcelona: [2.17, 41.39], Madrid: [-3.7, 40.42], Granada: [-3.6, 37.18]
 };
-const globeOrigin = { name: "Chicago", coordinates: [-87.63, 41.88] };
 const cityMoods = {
   London: { title: "A London daydream", note: "Red buses, old maps, garden roses, and something warm from the tea tin.", stamp: "TEA TIME", palette: ["#b6202a", "#748ea1", "#eadbbb", "#dbbc97", "#2f2926"], cues: ["Carnival crimson", "Circus blue", "Aged parchment"] },
   Paris: { title: "A little love note to Paris", note: "Powder-pink mornings, café crème, and a tiny bouquet from the corner market.", stamp: "BONJOUR", palette: ["#f2d8dc", "#bd7485", "#f4e9d4", "#804456", "#493a3c"], cues: ["Rosewater pink", "Café au lait", "Velvet burgundy"] },
   Amsterdam: { title: "Postcards from the canals", note: "Tulips on the table, canal-house windows, and bicycles against the brick.", stamp: "LIEVE GROETJES", palette: ["#c95e48", "#88a79b", "#f1e7cf", "#54776f", "#443c35"], cues: ["Tulip red", "Canal green", "Old brick"] },
-  Berlin: { title: "Notes from Berlin", note: "A little gallery grit, Bauhaus color, and late nights in the city.", stamp: "GUTEN TAG", palette: ["#d8a946", "#bd5147", "#e8e2c9", "#67765b", "#292c2a"], cues: ["Poster yellow", "Brick red", "Gallery green"] },
   Prague: { title: "A Prague storybook", note: "Terracotta rooftops, blue hour, old bookshops, and one more bridge.", stamp: "DOBRÝ DEN", palette: ["#c37a58", "#7286a1", "#eee4cf", "#7b5348", "#41404a"], cues: ["Roof tile", "Bohemian blue", "Old paper"] },
-  Venice: { title: "A slow day in Venice", note: "Lagoon light, painted shutters, and little flowers on a windowsill.", stamp: "CIAO, VENEZIA", palette: ["#78a99e", "#d5a45a", "#eee6d1", "#a95743", "#34463f"], cues: ["Lagoon glass", "Marigold", "Rosewood"] },
   Florence: { title: "Florence in the afternoon", note: "Sun-warmed terracotta, garden greens, and a sketchbook in the piazza.", stamp: "PIACERE", palette: ["#b95e43", "#76845d", "#f2e5cb", "#cfaa70", "#473628"], cues: ["Terracotta", "Olive leaf", "Tuscan sun"] },
   Milan: { title: "A Milan moodboard", note: "An old fashion plate, espresso after lunch, and a perfectly kept notebook.", stamp: "CON AMORE", palette: ["#8b3940", "#b89a68", "#f1e9d6", "#6c745a", "#39332e"], cues: ["Burgundy", "Champagne", "Fashion-plate olive"] },
-  Marseille: { title: "Salt air from Marseille", note: "Cobalt water, sun-faded shutters, and citrus in the afternoon light.", stamp: "BONJOUR MIDI", palette: ["#42809a", "#e2b95c", "#f1ead8", "#c76c4e", "#364744"], cues: ["Harbor blue", "Citrus peel", "Sun-washed white"] },
+  Interlaken: { title: "A little Alpine pause", note: "Mountain air, lake blues, and a few slow days between train rides.", stamp: "GRÜEZI", palette: ["#5d8990", "#9aa77a", "#f1ead8", "#d1a96b", "#344744"], cues: ["Lake blue", "Alpine green", "Mountain light"] },
+  Zurich: { title: "A Zurich notebook", note: "Old-town lanes, clear lake water, and one last Swiss afternoon.", stamp: "GRÜEZI", palette: ["#688aa0", "#a3ad9a", "#f4ecdb", "#c58459", "#35444c"], cues: ["Lake blue", "Stone streets", "Late light"] },
   Barcelona: { title: "A Barcelona summer", note: "Sea-glass blues, mosaic color, orange blossom, and a long beach walk.", stamp: "HOLA, BARCELONA", palette: ["#448596", "#df9655", "#efe3c9", "#b75543", "#3b463c"], cues: ["Sea glass", "Orange blossom", "Mosaic tile"] },
-  Madrid: { title: "A Madrid golden hour", note: "Vermilion shutters, warm gold, a little café table, and a very late supper.", stamp: "BUENOS DÍAS", palette: ["#b74f3e", "#d0a04e", "#f2e6cb", "#73805d", "#41382d"], cues: ["Vermilion", "Golden hour", "Olive branch"] }
+  Madrid: { title: "A Madrid golden hour", note: "Vermilion shutters, warm gold, a little café table, and a very late supper.", stamp: "BUENOS DÍAS", palette: ["#b74f3e", "#d0a04e", "#f2e6cb", "#73805d", "#41382d"], cues: ["Vermilion", "Golden hour", "Olive branch"] },
+  Granada: { title: "Granada after the day-trippers", note: "Hilltop views, orange trees, and the long echo of the Alhambra.", stamp: "HOLA, GRANADA", palette: ["#a95842", "#82906a", "#f4e8d2", "#d5ad66", "#40352c"], cues: ["Terracotta", "Citrus leaf", "Nasrid pattern"] }
 };
 const globeState = { longitude: -38, latitude: 44, zoom: 1.2, dragging: false, frame: 0, routeStartedAt: 0 };
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -202,26 +203,13 @@ function updateGlobe(globe, pins) {
     const x = Math.cos(phi) * Math.sin(delta);
     const y = Math.sin(phi) * Math.cos(centerLatitude) - Math.cos(phi) * Math.cos(delta) * Math.sin(centerLatitude);
     const depth = Math.sin(phi) * Math.sin(centerLatitude) + Math.cos(phi) * Math.cos(delta) * Math.cos(centerLatitude);
-    return { x: 50 + x * 46 * globeState.zoom, y: 50 - y * 46 * globeState.zoom, depth };
+    return { x: 50 + x * 46, y: 50 - y * 46, depth };
   };
-
-  const origin = globe.querySelector(".globe-origin");
-  if (origin) {
-    const point = project(globeOrigin.coordinates);
-    const visible = point.depth > 0.04;
-    origin.style.left = point.x + "%";
-    origin.style.top = point.y + "%";
-    origin.style.opacity = visible ? String(0.55 + point.depth * 0.45) : "0";
-    origin.style.pointerEvents = visible ? "auto" : "none";
-    origin.tabIndex = visible ? 0 : -1;
-    origin.setAttribute("aria-hidden", visible ? "false" : "true");
-    if (visible) projected.push(point);
-  }
 
   pins.forEach(pin => {
     const city = CITIES.find(item => slug(item.name) === pin.dataset.city);
     const point = project(globeCities[city ? city.name : ""] || [0, 48]);
-    const visible = point.depth > 0.04;
+    const visible = point.depth > 0.04 && Math.hypot(point.x - 50, point.y - 50) * globeState.zoom < 47;
     pin.style.left = point.x + "%";
     pin.style.top = point.y + "%";
     pin.style.opacity = visible ? String(0.55 + point.depth * 0.45) : "0";
@@ -436,15 +424,19 @@ function renderCityMoodboard(city, index) {
   return '<aside class="city-moodboard" style="' + style + '" aria-label="' + escapeHTML(city.name) + ' visual moodboard"><div class="moodboard-copy"><p class="moodboard-kicker">COLLECTED IN EUROPE <span>·</span> ' + String(index + 1).padStart(2, "0") + ' / ' + String(CITIES.length).padStart(2, "0") + '</p><h2>' + escapeHTML(mood.title) + '</h2><p>' + escapeHTML(mood.note) + '</p><div class="moodboard-cues">' + cues + '</div><div class="moodboard-palette" aria-label="City color palette">' + swatches + '</div></div><div class="moodboard-art"><div class="map-scrap" aria-hidden="true"><span>' + escapeHTML(city.name.toUpperCase()) + '</span><i></i><b></b></div><figure class="photo-cutout"><img src="' + imageUrl(city, 780) + '" alt="A second little glimpse of ' + escapeHTML(city.name) + '" loading="lazy"><figcaption>' + escapeHTML(city.name) + ' · ' + escapeHTML(city.country) + '</figcaption></figure><svg class="flower-cutout" viewBox="0 0 120 150" role="img" aria-label="A little flower for ' + escapeHTML(city.name) + '"><path class="flower-stem" d="M58 144 C63 120 53 97 63 74 C69 60 75 52 78 43"/><path class="flower-leaf" d="M61 112 C39 104 32 91 35 80 C51 82 63 94 61 112Z"/><path class="flower-leaf" d="M60 125 C79 116 91 103 87 91 C71 94 61 108 60 125Z"/><g class="flower-head"><ellipse cx="78" cy="29" rx="10" ry="20"/><ellipse cx="78" cy="29" rx="10" ry="20" transform="rotate(72 78 42)"/><ellipse cx="78" cy="29" rx="10" ry="20" transform="rotate(144 78 42)"/><ellipse cx="78" cy="29" rx="10" ry="20" transform="rotate(216 78 42)"/><ellipse cx="78" cy="29" rx="10" ry="20" transform="rotate(288 78 42)"/><circle cx="78" cy="42" r="7"/></g></svg><div class="mood-stamp">' + escapeHTML(mood.stamp) + '<span>' + String(index + 1).padStart(2, "0") + '</span></div><p class="moodboard-handwriting">wish you were here</p></div></aside>';
 }
 
+function renderRouteOverview() {
+  const cards = CITIES.map((city, index) => {
+    return '<a class="stop-card" href="#' + slug(city.name) + '"><span class="stop-photo"><img src="' + imageUrl(city, 720) + '" alt="" loading="lazy"><span class="stop-index">' + String(index + 1).padStart(2, "0") + '</span></span><span class="stop-copy"><strong>' + escapeHTML(city.name) + '</strong><span>' + escapeHTML(city.dates) + '</span><span class="stop-arrow" aria-hidden="true">↗</span></span></a>';
+  }).join("");
+  return '<section class="route-overview" id="itinerary-overview"><div class="section-heading"><div><p class="eyebrow"><span></span> FEB 2 – MAR 31</p><h2>The route, day by day.</h2></div><p>London to Spain, with Oxford, Bath, the Swiss Alps, and Granada along the way.</p></div><div class="stop-grid">' + cards + '</div></section>';
+}
+
 function renderHome() {
   document.documentElement.dataset.view = "home";
   document.documentElement.removeAttribute("data-city");
   renderNav("");
-  const pins = CITIES.map((city, index) => {
-    return '<a class="globe-pin" data-city="' + slug(city.name) + '" href="#' + slug(city.name) + '" aria-label="Explore ' + escapeHTML(city.name) + '"><span class="pin-dot" aria-hidden="true"></span><span class="pin-label">' + escapeHTML(city.name) + '</span></a>';
-  }).join("");
-  main.innerHTML = '<section class="welcome" id="route"><div class="welcome-copy"><p class="eyebrow"><span></span> CHICAGO TO LONDON · ELEVEN STOPS</p><h1>See you <em>out there.</em></h1><p class="welcome-intro">The trip starts in Chicago and crosses the Atlantic to London. Zoom in on Europe, then follow the route.</p></div><div class="globe-stage"><div class="globe" role="group" aria-label="Interactive Earth. Drag to rotate, use the zoom slider, or choose a destination marker."><svg class="globe-routes" viewBox="0 0 100 100" aria-hidden="true"><path class="flight-path"></path><g class="flight-plane" visibility="hidden"><path d="M-3.5-1.9 3.8 0-3.5 1.9-1.3 0Z"></path><path d="M-.3-.4 1.2-3 2-2.7 1.3-.2"></path></g></svg><a class="globe-origin" href="#london" aria-label="Chicago departure, flying to London"><span class="origin-dot" aria-hidden="true"></span><span class="origin-label">Chicago · departure</span></a>' + pins + '</div><div class="globe-controls"><p class="globe-hint" aria-live="polite">Chicago → London · Drag to explore</p><label class="globe-zoom-label" for="globe-zoom">ZOOM</label><input class="globe-zoom" id="globe-zoom" type="range" min="' + GLOBE_ZOOM_MIN + '" max="' + GLOBE_ZOOM_MAX + '" step="0.05" value="1.2" aria-label="Zoom the globe toward Europe"><button class="globe-spin" type="button">Spin the globe <span aria-hidden="true">↻</span></button></div><div class="globe-result" aria-live="polite"></div></div><p class="welcome-coordinate" aria-hidden="true">CHICAGO → LONDON · 11 CITIES</p></section>';
-  setupGlobe();
+  main.innerHTML = '<section class="welcome" id="route"><div class="welcome-copy"><p class="eyebrow"><span></span> A TRAVEL NOTEBOOK · FEB 2 – MAR 31</p><h1>A little time <em>in Europe.</em></h1><p class="welcome-intro">A London landing, a long railway wander, a few days in the Alps, and a final stretch in Spain. Here’s the route, with room for the lovely unplanned bits.</p><div class="welcome-details"><span><strong>11</strong> city stops</span><i aria-hidden="true"></i><span><strong>Feb 2</strong> first flight</span><i aria-hidden="true"></i><span><strong>Mar 31</strong> last day</span></div></div><figure class="welcome-postcard"><img src="' + imageUrl(CITIES[0], 1200) + '" alt="A view across London" fetchpriority="high"><span class="postcard-stamp" aria-hidden="true">EUROPE<br>BY RAIL</span><figcaption><span>THE FIRST POSTCARD</span><strong>London, England</strong><small>Arriving February 3 · 8:00 in the morning</small></figcaption></figure><span class="welcome-coordinate">A JOURNEY THROUGH ELEVEN STOPS</span></section>';
+  main.insertAdjacentHTML("beforeend", renderRouteOverview());
 }
 
 function renderEditor(city) {
@@ -516,9 +508,11 @@ function renderCity(originalCity) {
     return '<section class="guide-section" id="section-' + key + '"><h3>' + escapeHTML(title) + '</h3><div class="guide-content">' + content + "</div></section>";
   }).join("");
   const previous = CITIES[(index + CITIES.length - 1) % CITIES.length];
-  const next = CITIES[(index + 1) % CITIES.length];
+  const next = city.name === "Granada"
+    ? CITIES.find(entry => entry.name === "Madrid")
+    : CITIES[(index + 1) % CITIES.length];
 
-  main.innerHTML = '<div class="city-page"><div class="city-hero"><img src="' + imageUrl(city, 2000) + '" alt="A view of ' + escapeHTML(city.name) + '" fetchpriority="high"><div class="city-hero-shade"></div><a class="back-link" href="#"><span aria-hidden="true">&#8592;</span> The whole trip</a><div class="hero-copy"><p class="city-count">STOP ' + String(index + 1).padStart(2, "0") + ' <span aria-hidden="true">/</span> ' + String(CITIES.length).padStart(2, "0") + '</p><h1>' + escapeHTML(city.name) + '</h1><p class="city-country">' + escapeHTML(city.country) + '</p></div><span class="welcome-coordinate" aria-hidden="true">' + String(index + 1).padStart(2, "0") + " / " + String(CITIES.length).padStart(2, "0") + '</span></div>' + renderCityMoodboard(city, index) + '<nav class="section-nav" aria-label="On this page">' + sectionLinks + '<a href="#journal">Your journal</a><a href="#postcards">Postcards</a><button class="edit-guide-link" type="button" data-open-editor>Edit guide</button></nav><div class="guide-sections">' + sectionContent + renderJournal(citySlug) + renderMediaSection(city) + renderEditor(city) + '</div><nav class="city-pager" aria-label="Browse cities"><a href="#' + slug(previous.name) + '"><span>PREVIOUS STOP</span><strong>&larr; ' + escapeHTML(previous.name) + '</strong></a><a href="#"><span>ROUTE OVERVIEW</span><strong>All ' + CITIES.length + ' cities &uarr;</strong></a><a href="#' + slug(next.name) + '"><span>NEXT STOP</span><strong>' + escapeHTML(next.name) + ' &rarr;</strong></a></nav><p class="local-storage-note">Your journal, uploads, and guide edits are saved in this browser only.</p></div>';
+  main.innerHTML = '<div class="city-page"><div class="city-hero"><img src="' + imageUrl(city, 2000) + '" alt="A view of ' + escapeHTML(city.name) + '" fetchpriority="high"><div class="city-hero-shade"></div><a class="back-link" href="#"><span aria-hidden="true">&#8592;</span> The whole trip</a><div class="hero-copy"><p class="city-count">STOP ' + String(index + 1).padStart(2, "0") + ' <span aria-hidden="true">/</span> ' + String(CITIES.length).padStart(2, "0") + ' · ' + escapeHTML(city.dates) + '</p><h1>' + escapeHTML(city.name) + '</h1><p class="city-country">' + escapeHTML(city.country) + '</p></div><span class="welcome-coordinate" aria-hidden="true">' + String(index + 1).padStart(2, "0") + " / " + String(CITIES.length).padStart(2, "0") + '</span></div>' + renderCityMoodboard(city, index) + '<nav class="section-nav" aria-label="On this page">' + sectionLinks + '<a href="#journal">Your journal</a><a href="#postcards">Postcards</a><button class="edit-guide-link" type="button" data-open-editor>Edit guide</button></nav><div class="guide-sections">' + sectionContent + renderJournal(citySlug) + renderMediaSection(city) + renderEditor(city) + '</div><nav class="city-pager" aria-label="Browse cities"><a href="#' + slug(previous.name) + '"><span>PREVIOUS STOP</span><strong>&larr; ' + escapeHTML(previous.name) + '</strong></a><a href="#"><span>ROUTE OVERVIEW</span><strong>All ' + CITIES.length + ' cities &uarr;</strong></a><a href="#' + slug(next.name) + '"><span>NEXT STOP</span><strong>' + escapeHTML(next.name) + ' &rarr;</strong></a></nav><p class="local-storage-note">Dates are shown without a year as provided. Check transport schedules, ticket prices, opening times, and booking availability before you go.</p></div>';
   loadMemories(city, citySlug);
 }
 

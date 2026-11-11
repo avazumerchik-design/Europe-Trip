@@ -1,5 +1,30 @@
 addCity({
   name: "Prague", country: "Czech Republic",
+  dates: "Feb 23–Mar 1",
+  itinerary: [
+    "Feb 23 | Arrive from Amsterdam after the overnight train.",
+    "Feb 24 | Old Town Square, the Astronomical Clock, and Charles Bridge.",
+    "Feb 25 | Prague Castle and St. Vitus Cathedral.",
+    "Feb 26 | Jewish Quarter and the Old Jewish Cemetery.",
+    "Feb 27 | Malá Strana and Petřín Hill.",
+    "Feb 28 | Flexible day for a favorite neighborhood, café, or museum.",
+    "Mar 1 | Fly to Florence; your roughly $110 fare is an estimate from your notes, so verify the route, baggage, and total cost."
+  ],
+  stay: [
+    "Old Town or Malá Strana | Close to many sights; compare prices and late-night noise.",
+    "Vinohrady | Cafés and transit with a more residential feel.",
+    "Karlín | A convenient Metro-connected alternative."
+  ],
+  eat: [
+    "Lokál Dlouhááá | Czech pub food and beer; reservations can help.",
+    "Café Savoy | A sit-down café for breakfast or pastries.",
+    "Havelský Market | Quick snacks and a central market stop."
+  ],
+  shop: [
+    "Havelský Market | Souvenirs and produce in the center.",
+    "Vinohrady | Independent shops and cafés away from the busiest lanes.",
+    "Pařížská Street | Designer shopping and window-shopping."
+  ],
   see: [
     "Charles Bridge | Go at sunrise before the crowds.",
     "Prague Castle | Includes St. Vitus Cathedral.",
