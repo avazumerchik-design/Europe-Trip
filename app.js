@@ -18,6 +18,7 @@ const stopCount = document.getElementById("stop-count");
 const slug = name => name.toLowerCase().replace(/\s+/g, "-");
 const GUIDE_KEY = "europe-notebook-guides-v1";
 const JOURNAL_KEY = "europe-notebook-journal-v1";
+const TEXT_KEY = "europe-notebook-text-v1";
 const DB_NAME = "europe-notebook-memories";
 const DB_STORE = "media";
 const EARTH_TEXTURE = "https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg";
@@ -58,6 +59,7 @@ const cityMoods = {
 };
 const globeState = { longitude: -38, latitude: 44, zoom: 1.2, dragging: false, frame: 0, routeStartedAt: 0 };
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let siteEditing = false;
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -106,6 +108,95 @@ function showNotice(message, isError) {
   notice.hidden = false;
   window.clearTimeout(notice.hideTimer);
   notice.hideTimer = window.setTimeout(() => { notice.hidden = true; }, 5000);
+}
+
+function textHash(value) {
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(36);
+}
+
+function textNodeKey(root, node, prefix) {
+  const parts = [];
+  let element = node.parentElement;
+  while (element && element !== root) {
+    const siblings = Array.from(element.parentElement.children).filter(item => item.tagName === element.tagName);
+    parts.unshift(element.tagName.toLowerCase() + ":" + siblings.indexOf(element));
+    element = element.parentElement;
+  }
+  const textSiblings = Array.from(node.parentNode.childNodes).filter(item => item.nodeType === Node.TEXT_NODE);
+  return prefix + "/" + parts.join("/") + ":text:" + textSiblings.indexOf(node) + ":" + textHash(node.nodeValue);
+}
+
+function applySiteTextEdits(mediaOnly) {
+  const pageKey = document.documentElement.dataset.view === "city"
+    ? document.documentElement.dataset.city
+    : "home";
+  const buckets = readStored(TEXT_KEY, {});
+  const roots = mediaOnly
+    ? [{ element: document.getElementById("memory-grid"), bucket: pageKey, prefix: "media" }]
+    : [
+      { element: document.querySelector(".masthead"), bucket: "global", prefix: "masthead" },
+      { element: nav, bucket: "global", prefix: "nav" },
+      { element: main, bucket: pageKey, prefix: "main" }
+    ];
+
+  roots.forEach(({ element, bucket, prefix }) => {
+    if (!element) return;
+    element.querySelectorAll("[data-site-edit-text]").forEach(span => {
+      span.contentEditable = siteEditing ? "true" : "false";
+      if (siteEditing) {
+        span.tabIndex = 0;
+        span.setAttribute("role", "textbox");
+        span.setAttribute("aria-label", "Edit this text");
+        span.spellcheck = true;
+      } else {
+        span.removeAttribute("tabindex");
+        span.removeAttribute("role");
+        span.removeAttribute("aria-label");
+      }
+    });
+
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue.trim() || node.parentElement.closest("[data-site-edit-text], .site-edit-toggle, script, style, svg, noscript")) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const textNodes = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      textNodes.push({ node, key: textNodeKey(element, node, prefix) });
+    }
+
+    textNodes.forEach(({ node, key }) => {
+      const span = document.createElement("span");
+      span.dataset.siteEditText = key;
+      span.dataset.siteEditBucket = bucket;
+      span.textContent = Object.prototype.hasOwnProperty.call(buckets[bucket] || {}, key)
+        ? buckets[bucket][key]
+        : node.nodeValue;
+      span.contentEditable = siteEditing ? "true" : "false";
+      if (siteEditing) {
+        span.tabIndex = 0;
+        span.setAttribute("role", "textbox");
+        span.setAttribute("aria-label", "Edit this text");
+        span.spellcheck = true;
+      }
+      node.replaceWith(span);
+    });
+  });
+
+  const toggle = document.getElementById("site-edit-toggle");
+  if (toggle) {
+    toggle.textContent = siteEditing ? "Save and finish" : "Edit site text";
+    toggle.setAttribute("aria-pressed", String(siteEditing));
+  }
 }
 
 function getGuide(city) {
@@ -437,6 +528,7 @@ function renderHome() {
   renderNav("");
   main.innerHTML = '<section class="welcome" id="route"><div class="welcome-copy"><p class="eyebrow"><span></span> A TRAVEL NOTEBOOK · FEB 2 – MAR 31</p><h1>A little time <em>in Europe.</em></h1><p class="welcome-intro">A London landing, a long railway wander, a few days in the Alps, and a final stretch in Spain. Here’s the route, with room for the lovely unplanned bits.</p><div class="welcome-details"><span><strong>11</strong> city stops</span><i aria-hidden="true"></i><span><strong>Feb 2</strong> first flight</span><i aria-hidden="true"></i><span><strong>Mar 31</strong> last day</span></div></div><figure class="welcome-postcard"><img src="' + imageUrl(CITIES[0], 1200) + '" alt="A view across London" fetchpriority="high"><span class="postcard-stamp" aria-hidden="true">EUROPE<br>BY RAIL</span><figcaption><span>THE FIRST POSTCARD</span><strong>London, England</strong><small>Arriving February 3 · 8:00 in the morning</small></figcaption></figure><span class="welcome-coordinate">A JOURNEY THROUGH ELEVEN STOPS</span></section>';
   main.insertAdjacentHTML("beforeend", renderRouteOverview());
+  applySiteTextEdits();
 }
 
 function renderEditor(city) {
@@ -477,9 +569,11 @@ async function loadMemories(city, citySlug) {
     if (!grid.isConnected || grid.dataset.city !== citySlug) return;
     releaseObjectUrls();
     grid.innerHTML = assets.length ? renderMemories(assets) : '<p class="empty-note">Your future postcards will land here.</p>';
+    applySiteTextEdits(true);
   } catch (error) {
     console.error("Could not load this city's saved media.", error);
     grid.innerHTML = '<p class="empty-note is-error">Photos and videos could not be loaded: ' + escapeHTML(error.message) + "</p>";
+    applySiteTextEdits(true);
   }
 }
 
@@ -514,6 +608,7 @@ function renderCity(originalCity) {
 
   main.innerHTML = '<div class="city-page"><div class="city-hero"><img src="' + imageUrl(city, 2000) + '" alt="A view of ' + escapeHTML(city.name) + '" fetchpriority="high"><div class="city-hero-shade"></div><a class="back-link" href="#"><span aria-hidden="true">&#8592;</span> The whole trip</a><div class="hero-copy"><p class="city-count">STOP ' + String(index + 1).padStart(2, "0") + ' <span aria-hidden="true">/</span> ' + String(CITIES.length).padStart(2, "0") + ' · ' + escapeHTML(city.dates) + '</p><h1>' + escapeHTML(city.name) + '</h1><p class="city-country">' + escapeHTML(city.country) + '</p></div><span class="welcome-coordinate" aria-hidden="true">' + String(index + 1).padStart(2, "0") + " / " + String(CITIES.length).padStart(2, "0") + '</span></div>' + renderCityMoodboard(city, index) + '<nav class="section-nav" aria-label="On this page">' + sectionLinks + '<a href="#journal">Your journal</a><a href="#postcards">Postcards</a><button class="edit-guide-link" type="button" data-open-editor>Edit guide</button></nav><div class="guide-sections">' + sectionContent + renderJournal(citySlug) + renderMediaSection(city) + renderEditor(city) + '</div><nav class="city-pager" aria-label="Browse cities"><a href="#' + slug(previous.name) + '"><span>PREVIOUS STOP</span><strong>&larr; ' + escapeHTML(previous.name) + '</strong></a><a href="#"><span>ROUTE OVERVIEW</span><strong>All ' + CITIES.length + ' cities &uarr;</strong></a><a href="#' + slug(next.name) + '"><span>NEXT STOP</span><strong>' + escapeHTML(next.name) + ' &rarr;</strong></a></nav><p class="local-storage-note">Dates are shown without a year as provided. Check transport schedules, ticket prices, opening times, and booking availability before you go.</p></div>';
   loadMemories(city, citySlug);
+  applySiteTextEdits();
 }
 
 function show() {
@@ -587,6 +682,32 @@ main.addEventListener("click", async event => {
   }
   const postcardButton = event.target.closest("[data-postcard]");
   if (postcardButton) await downloadPostcard(postcardButton.dataset.postcard, postcardButton);
+});
+
+document.addEventListener("click", event => {
+  if (event.target.closest("#site-edit-toggle")) {
+    siteEditing = !siteEditing;
+    applySiteTextEdits();
+    showNotice(siteEditing
+      ? "Click any text to edit it. Changes save automatically in this browser."
+      : "Your text edits are saved in this browser.");
+    return;
+  }
+  if (siteEditing && event.target.closest("a, button")) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const editable = event.target.closest("[data-site-edit-text]");
+    if (editable) editable.focus();
+  }
+}, true);
+
+document.addEventListener("input", event => {
+  const span = event.target.closest("[data-site-edit-text]");
+  if (!span || !siteEditing) return;
+  const stored = readStored(TEXT_KEY, {});
+  stored[span.dataset.siteEditBucket] = stored[span.dataset.siteEditBucket] || {};
+  stored[span.dataset.siteEditBucket][span.dataset.siteEditText] = span.textContent;
+  writeStored(TEXT_KEY, stored);
 });
 
 main.addEventListener("submit", async event => {
